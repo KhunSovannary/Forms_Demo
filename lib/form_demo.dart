@@ -10,9 +10,14 @@ class FormsDemo extends StatefulWidget {
 }
 
 class FormsDemoState extends State<FormsDemo> {
+<<<<<<< HEAD
   PickedFile _imageFile;
   final ImagePicker _picker = ImagePicker();
 
+=======
+  final _picker = ImagePicker();
+  File _image;
+>>>>>>> b1c5802ef053659889c8c11ce000add838a2164e
   String _name;
   String _age;
   String _sex;
@@ -26,7 +31,11 @@ class FormsDemoState extends State<FormsDemo> {
       child: Stack(children: <Widget>[
       CircleAvatar(
         radius: 60.0,
+<<<<<<< HEAD
         backgroundImage: _imageFile==null? AssetImage('No Photo Selected'): FileImage(File(_imageFile.path)),
+=======
+        backgroundImage: FileImage(_image),
+>>>>>>> b1c5802ef053659889c8c11ce000add838a2164e
       ),
       Positioned(
         bottom: 10.0,
@@ -51,8 +60,18 @@ class FormsDemoState extends State<FormsDemo> {
   void takePhoto(ImageSource source) async {
       final pickedFile = await _picker.getImage(
       source: source);
+<<<<<<< HEAD
       this.setState(() {
         _imageFile = pickedFile;});
+=======
+      setState(() {
+        if(pickedFile!=null){
+        _image = File(pickedFile.path);}
+        else {
+          print('No image selected.');
+        }
+  });
+>>>>>>> b1c5802ef053659889c8c11ce000add838a2164e
   }
   Widget bottomSheet(){
     return Container(
