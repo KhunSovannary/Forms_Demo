@@ -1,23 +1,18 @@
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+
 class FormsDemo extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return FormsDemoState();}
+    return FormsDemoState();
+  }
 }
 
 class FormsDemoState extends State<FormsDemo> {
-<<<<<<< HEAD
-  PickedFile _imageFile;
-  final ImagePicker _picker = ImagePicker();
-
-=======
   final _picker = ImagePicker();
   File _image;
->>>>>>> b1c5802ef053659889c8c11ce000add838a2164e
   String _name;
   String _age;
   String _sex;
@@ -25,64 +20,53 @@ class FormsDemoState extends State<FormsDemo> {
   String _phoneNumber;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  Widget _buildProfilePic()
-  {
+  Widget _buildProfilePic() {
     return Center(
       child: Stack(children: <Widget>[
-      CircleAvatar(
-        radius: 60.0,
-<<<<<<< HEAD
-        backgroundImage: _imageFile==null? AssetImage('No Photo Selected'): FileImage(File(_imageFile.path)),
-=======
-        backgroundImage: FileImage(_image),
->>>>>>> b1c5802ef053659889c8c11ce000add838a2164e
-      ),
-      Positioned(
-        bottom: 10.0,
-        right: 45.0,
-        child: InkWell(
-          onTap: () {
-            showModalBottomSheet(
-                context: context,
-                builder: ((builder) => bottomSheet()),
-            );
-          },
-          child: Icon(
-          Icons.camera_alt,
-          color:Colors.teal,
-          size:30.0,
+        CircleAvatar(
+          radius: 60.0,
+          backgroundImage: FileImage(_image),
         ),
-          )
-      ),
+        Positioned(
+            bottom: 10.0,
+            right: 45.0,
+            child: InkWell(
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: ((builder) => bottomSheet()),
+                );
+              },
+              child: Icon(
+                Icons.camera_alt,
+                color: Colors.teal,
+                size: 30.0,
+              ),
+            )),
       ]),
     );
   }
+
   void takePhoto(ImageSource source) async {
-      final pickedFile = await _picker.getImage(
-      source: source);
-<<<<<<< HEAD
-      this.setState(() {
-        _imageFile = pickedFile;});
-=======
-      setState(() {
-        if(pickedFile!=null){
-        _image = File(pickedFile.path);}
-        else {
-          print('No image selected.');
-        }
-  });
->>>>>>> b1c5802ef053659889c8c11ce000add838a2164e
+    final pickedFile = await _picker.getImage(source: source);
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
   }
-  Widget bottomSheet(){
+
+  Widget bottomSheet() {
     return Container(
-      height: 100.0,
-      width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: 20,
-      ),
-      child: Column(
-        children: <Widget>[
+        height: 100.0,
+        width: MediaQuery.of(context).size.width,
+        margin: EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 20,
+        ),
+        child: Column(children: <Widget>[
           Text(
             "Select Profile Photo",
             style: TextStyle(
@@ -90,7 +74,7 @@ class FormsDemoState extends State<FormsDemo> {
             ),
           ),
           SizedBox(height: 20),
-          Row(mainAxisAlignment: MainAxisAlignment.center,children: <Widget>[
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
             FlatButton.icon(
               icon: Icon(Icons.camera),
               onPressed: () {
@@ -100,135 +84,147 @@ class FormsDemoState extends State<FormsDemo> {
             ),
             FlatButton.icon(
               icon: Icon(Icons.image),
-              onPressed: (){
+              onPressed: () {
                 takePhoto(ImageSource.gallery);
               },
-              label: Text("Gallery"),)
+              label: Text("Gallery"),
+            )
           ])
-        ]
-      )
-    );
+        ]));
   }
+
   Widget _buildName() {
     return TextFormField(
       decoration: InputDecoration(labelText: 'Name'),
       keyboardType: TextInputType.text,
       // ignore: missing_return
-      validator: (String value){
+      validator: (String value) {
         if (value.isEmpty) {
           return 'Name is Required';
         }
       },
-      onSaved: (String value){
+      onSaved: (String value) {
         _name = value;
       },
     );
   }
+
   Widget _buildAge() {
     return TextFormField(
-      decoration: InputDecoration(labelText: 'Age',),
+      decoration: InputDecoration(
+        labelText: 'Age',
+      ),
       keyboardType: TextInputType.number,
       // ignore: missing_return
-      validator: (String value){
+      validator: (String value) {
         if (value.isEmpty) {
           return 'Age is Required';
         }
       },
-      onSaved: (String value){
+      onSaved: (String value) {
         _age = value;
       },
     );
   }
+
   Widget _buildSex() {
     return TextFormField(
-      decoration: InputDecoration(labelText:'Sex',),
+      decoration: InputDecoration(
+        labelText: 'Sex',
+      ),
       keyboardType: TextInputType.text,
       // ignore: missing_return
-      validator: (String value){
+      validator: (String value) {
         if (value.isEmpty) {
           return 'Sex is Required';
         }
       },
-      onSaved: (String value){
+      onSaved: (String value) {
         _sex = value;
       },
     );
   }
+
   Widget _buildBirthDate() {
     return TextFormField(
       decoration: InputDecoration(labelText: 'Birth Date'),
       keyboardType: TextInputType.datetime,
       // ignore: missing_return
-      validator: (String value){
+      validator: (String value) {
         if (value.isEmpty) {
           return 'Birth Date is Required';
         }
       },
-      onSaved: (String value){
+      onSaved: (String value) {
         _birthDate = value;
       },
     );
   }
+
   Widget _buildPhoneNumber() {
     return TextFormField(
       decoration: InputDecoration(labelText: 'Phone Number'),
       keyboardType: TextInputType.phone,
       // ignore: missing_return
-      validator: (String value){
+      validator: (String value) {
         if (value.isEmpty) {
           return 'Phone Number is Required';
         }
       },
-      onSaved: (String value){
+      onSaved: (String value) {
         _phoneNumber = value;
       },
     );
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Form Demo"),),
-        body: SingleChildScrollView( child: Container(
+        appBar: AppBar(
+          title: Text("Form Demo"),
+        ),
+        body: SingleChildScrollView(
+          child: Container(
             margin: EdgeInsets.all(24),
             child: Form(
-                key: _formKey,
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SingleChildScrollView(
-                            child: Column(
-                            children: <Widget> [
-                                    _buildProfilePic(),
-                                    _buildName(),
-                                    _buildAge(),
-                                    _buildSex(),
-                                    _buildBirthDate(),
-                                    _buildPhoneNumber(),
-                                    SizedBox(height: 100),
-                                    RaisedButton(
-                                       child: Text('Submit',
-                                       style: TextStyle(color: Colors.blue, fontSize: 16),
-                                       ),
-                                       onPressed:() {
-                                       if(!_formKey.currentState.validate()){
-                                       return;
-                                        }
-                                       _formKey.currentState.save();
-                                       print(_name);
-                                       print(_age);
-                                       print(_sex);
-                                       print(_birthDate);
-                                       print(_phoneNumber);
-                                    },
-                                  )
-                                ],
-                              ),
-                            ),
-                           ],
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        _buildProfilePic(),
+                        _buildName(),
+                        _buildAge(),
+                        _buildSex(),
+                        _buildBirthDate(),
+                        _buildPhoneNumber(),
+                        SizedBox(height: 100),
+                        RaisedButton(
+                          child: Text(
+                            'Submit',
+                            style: TextStyle(color: Colors.blue, fontSize: 16),
                           ),
-                          ),
-                      ),)
-                      ) ;
-                    }
+                          onPressed: () {
+                            if (!_formKey.currentState.validate()) {
+                              return;
+                            }
+                            _formKey.currentState.save();
+                            print(_name);
+                            print(_age);
+                            print(_sex);
+                            print(_birthDate);
+                            print(_phoneNumber);
+                          },
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ));
+  }
 }
