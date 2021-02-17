@@ -45,7 +45,7 @@ class FormsDemoState extends State<FormsDemo> {
           },
           child: Icon(
           Icons.camera_alt,
-          color:Colors.teal,
+          color:Colors.blue,
           size:30.0,
         ),
           )

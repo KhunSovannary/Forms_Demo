@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Forms Demo",
       theme: ThemeData(
-      primarySwatch: Colors.teal,
+      primarySwatch: Colors.blue,
     ),
       home: FormsDemo(),
     );
